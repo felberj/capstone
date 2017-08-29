@@ -53,8 +53,12 @@ CFLAGS += -mmacosx-version-min=10.5 \
 		  -fno-builtin
 endif
 
+# on MacOS, compile in Universal format by default
+MACOS_UNIVERSAL ?= yes
+ifeq ($(MACOS_UNIVERSAL),yes)
 CFLAGS += $(foreach arch,$(LIBARCHS),-arch $(arch))
 LDFLAGS += $(foreach arch,$(LIBARCHS),-arch $(arch))
+endif
 
 PREFIX ?= /usr
 DESTDIR ?=
